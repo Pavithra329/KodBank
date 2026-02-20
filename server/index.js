@@ -9,27 +9,13 @@ const PORT = process.env.PORT || 4000;
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
 const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-kodbank-key';
 
+app.use(express.json());
 app.use(
   cors({
     origin: FRONTEND_ORIGIN,
     credentials: true,
   }),
 );
-const token = jwt.sign(
-  { sub: row.uname, role: row.role },
-  JWT_SECRET,
-  { expiresIn: '1h' },
-);
-// // In a real app, store this in env var
-// const JWT_SECRET = 'super-secret-kodbank-key';
-
-// app.use(express.json());
-// app.use(
-//   cors({
-//     origin: 'http://localhost:5173',
-//     credentials: true,
-//   }),
-// );
 app.use(cookieParser());
 
 initDb();
